@@ -1,11 +1,45 @@
 print("Welcome to the UW Calculator Playground")
 
 func calculate(_ args: [String]) -> Int {
-    return -1
+    if args.count == 1 {
+        return 0
+    }
+    let type = args.last
+    if type == "count" {
+        return args.count - 1
+    } else if type == "avg" {
+        var total = 0
+        for num in 0...(args.count - 1)  {
+            total += Int(args[num]) ?? 0
+        }
+        return total / (args.count - 1)
+    } else if type == "fact" {
+        if Int(args[0]) == 0 {
+            return 1
+        }
+        var total = 1
+        for num in 1...Int(args[0])! {
+            total *= num
+        }
+        return total
+    } else {
+        let oper = args[1]
+        if oper == "+" {
+            return Int(args[0])! + Int(args[2])!
+        } else if oper == "-" {
+            return Int(args[0])! - Int(args[2])!
+        } else if oper == "/" {
+            return Int(args[0])! / Int(args[2])!
+        } else if oper == "%" {
+            return Int(args[0])! % Int(args[2])!
+        } else {
+            return Int(args[0])! * Int(args[2])!
+        }
+    }
 }
 
 func calculate(_ arg: String) -> Int {
-    return -1
+    return calculate(arg.split(separator: " ").map(String.init))
 }
 
 // -------------------------------------------
@@ -24,13 +58,13 @@ calculate(["1", "2", "3", "4", "5", "count"]) == 5
 calculate(["count"]) == 0
 
 calculate(["1", "2", "3", "4", "5", "avg"]) == 3
-    // 15 / 5 = 3
+// 15 / 5 = 3
 calculate(["2", "2", "4", "4", "avg"]) == 3
-    // 12 / 4 = 3
+// 12 / 4 = 3
 calculate(["2", "avg"]) == 2
-    // 2 / 1 = 2
+// 2 / 1 = 2
 calculate(["avg"]) == 0
-    // 0 / 0 = 0 (not really, but it's an edge case
+// 0 / 0 = 0 (not really, but it's an edge case
 
 calculate(["0", "fact"]) == 1
 calculate(["1", "fact"]) == 1
@@ -54,30 +88,64 @@ calculate("5 fact") == 120
 // Implement calculate([String]) and calculate(String)
 // to handle negative numbers
 /*
-calculate(["2", "+", "-2"]) == 0
-calculate(["2", "-", "-2"]) == 4
-calculate(["2", "*", "-2"]) == -4
-calculate(["2", "/", "-2"]) == -1
-calculate(["-5", "%", "2"]) == -1
-
-calculate(["1", "-2", "3", "-2", "5", "avg"]) == 1
-
-calculate("2 + -2") == 0
-calculate("2 * -2") == -4
-calculate("2 - -2") == 4
-calculate("-2 / 2") == -1
-
-calculate("1 -2 3 -4 5 count") == 5
-*/
+ calculate(["2", "+", "-2"]) == 0
+ calculate(["2", "-", "-2"]) == 4
+ calculate(["2", "*", "-2"]) == -4
+ calculate(["2", "/", "-2"]) == -1
+ calculate(["-5", "%", "2"]) == -1
  
+ calculate(["1", "-2", "3", "-2", "5", "avg"]) == 1
+ 
+ calculate("2 + -2") == 0
+ calculate("2 * -2") == -4
+ calculate("2 - -2") == 4
+ calculate("-2 / 2") == -1
+ 
+ calculate("1 -2 3 -4 5 count") == 5
+ */
+
 // Implement calculate([String]) and calculate(String)
 // to use floating-point values
-/*
+
 func calculate(_ args: [String]) -> Double {
-    return -1.0
+    if args.count == 1 {
+        return 0.0
+    }
+    let type = args.last
+    if type == "count" {
+        return Double(args.count - 1)
+    } else if type == "avg" {
+        var total = 0.0
+        for num in 0...(args.count - 1)  {
+            total += Double(args[num]) ?? 0.0
+        }
+        return total / Double(args.count - 1)
+    } else if type == "fact" {
+        if Int(args[0]) == 0 {
+            return 1.0
+        }
+        var total = 1.0
+        for num in 1...Int(args[0])! {
+            total *= Double(num)
+        }
+        return total
+    } else {
+        let oper = args[1]
+        if oper == "+" {
+            return Double(args[0])! + Double(args[2])!
+        } else if oper == "-" {
+            return Double(args[0])! - Double(args[2])!
+        } else if oper == "/" {
+            return Double(args[0])! / Double(args[2])!
+        } else if oper == "%" {
+            return Double(args[0])!.truncatingRemainder(dividingBy: Double(args[2])!)
+        } else {
+            return Double(args[0])! * Double(args[2])!
+        }
+    }
 }
 func calculate(_ arg: String) -> Double {
-    return -1.0
+    return calculate(arg.split(separator: " ").map(String.init))
 }
 
 calculate(["2.0", "+", "2.0"]) == 4.0
@@ -86,5 +154,5 @@ calculate(["12.0", "-", "12.0"]) == 0.0
 calculate(["2.5", "*", "2.5"]) == 6.25
 calculate(["2.0", "/", "2.0"]) == 1.0
 calculate(["2.0", "%", "2.0"]) == 0.0
-calculate("1.0 2.0 3.0 4.0 5.0 count") == 5
-*/
+calculate("1.0 2.0 3.0 4.0 5.0 count") == 5.0
+
