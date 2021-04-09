@@ -87,7 +87,7 @@ calculate("5 fact") == 120
 
 // Implement calculate([String]) and calculate(String)
 // to handle negative numbers
-/*
+
  calculate(["2", "+", "-2"]) == 0
  calculate(["2", "-", "-2"]) == 4
  calculate(["2", "*", "-2"]) == -4
@@ -102,7 +102,7 @@ calculate("5 fact") == 120
  calculate("-2 / 2") == -1
  
  calculate("1 -2 3 -4 5 count") == 5
- */
+ 
 
 // Implement calculate([String]) and calculate(String)
 // to use floating-point values
